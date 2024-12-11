@@ -44,11 +44,11 @@
   gap: 16px;
 }
 
-.imageThumbnails button {
+.imageThumbnailsActive {
   opacity: 1;
 }
 
-.imageThumbnails button:not(:first-child) {
+.imageThumbnailsInactive {
   opacity: 0.5;
 }
 

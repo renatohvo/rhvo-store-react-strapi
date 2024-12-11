@@ -103,7 +103,7 @@ const ProductDetails = () => {
               {images.map((image, index) => (
                 <button
                   key={index}
-                  className={index !== currentImageIndex ? "inactive-thumbnail" : ""}
+                  className={index !== currentImageIndex ? styles.imageThumbnailsInactive : styles.imageThumbnailsActive}
                   onClick={() => setCurrentImageIndex(index)}
                 >
                   <img
