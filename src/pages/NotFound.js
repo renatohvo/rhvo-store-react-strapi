@@ -8,10 +8,12 @@ const NotFound = () => {
     }
 
     return (
-        <Layout>
-            <div style={center}>
+        <Layout title="404" description="This is the 404 Page" >
+            <div className="text-center mt-5" style={center}>
                 <h1>404</h1>
                 <p>This is the 404 Page.</p>
+                <br />
+                <h5>Página não Encontrada.</h5>
             </div>
         </Layout>
     );

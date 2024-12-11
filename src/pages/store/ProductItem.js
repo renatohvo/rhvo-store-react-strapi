@@ -19,18 +19,18 @@ const ProductItem = ({ product }) => {
             <p>{product.attributes.title}</p>
             <h3 className="text-left">{formatNumber(product.attributes.price)}</h3>
             <div className="text-right">
-                <Link to={`/product/${product.id}`} className="btn btn-link btn-sm mr-2">Details</Link>
+                <Link to={`/product/${product.id}`} className="btn btn-link btn-sm mr-2">Detalhes</Link>
                 {
                     isInCart(product) &&
                     <button
                         onClick={() => increase(product)}
-                        className="btn btn-outline-primary btn-sm">Add more</button>
+                        className="btn btn-outline-primary btn-sm">Adicionar mais</button>
                 }
                 {
                     !isInCart(product) &&
                     <button
                         onClick={() => addProduct(product)}
-                        className="btn btn-primary btn-sm">Add to cart</button>
+                        className="btn btn-primary btn-sm">Adicionar ao carrinho</button>
                 }
             </div>
         </div>

@@ -69,10 +69,10 @@ const ProductDetails = () => {
   const newPrice = Math.trunc(product?.attributes.price - discountAmount);
   const oldPrice = Math.trunc(product?.attributes.price);
 
-  if (loading) return <p>Loading...</p>;
+  if (loading) return <p>Carregando...</p>;
 
   if (!product) {
-    return <p>Product not found</p>;
+    return <p>Produto não encontrado.</p>;
   }
 
   return (
@@ -119,7 +119,7 @@ const ProductDetails = () => {
           <div className={styles.descriptionContainer}>
             <h1 className={styles.productTitle}>{product.attributes.title}</h1>
             <div>
-              <span style={{ color: '#718096' }}>DESCRIPTION</span>
+              <span style={{ color: '#718096' }}>DESCRIÇÃO</span>
               <p className={styles.productDescription}>{product.attributes.characteristics}</p>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
@@ -133,13 +133,13 @@ const ProductDetails = () => {
                 isInCart(product) &&
                 <button
                   onClick={() => increase(product)}
-                  className="btn btn-outline-primary btn-sm">Add more</button>
+                  className="btn btn-outline-primary btn-sm">Adicionar mais</button>
               }
               {
                 !isInCart(product) &&
                 <button
                   onClick={() => addProduct(product)}
-                  className="btn btn-primary btn-sm">Add to cart</button>
+                  className="btn btn-primary btn-sm">Adicionar ao carrinho</button>
               }
             </div>
           </div>

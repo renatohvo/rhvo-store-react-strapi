@@ -7,7 +7,7 @@ const About = () => {
     return (
         <Layout title="About" description="This is the About page" >
             <div className="text-center mt-5">
-                <h1>About</h1>
+                <h1>Sobre</h1>
                 <p>This project was built for practice purposes using <strong>Context API</strong> by React.</p>
 
                 <a className="btn btn-primary" href="https://github.com/AlexSegen/react-shopping-cart">

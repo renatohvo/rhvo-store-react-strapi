@@ -25,7 +25,7 @@ const ProductsGrid = () => {
             <div className="row">
                 <div className="col-sm-8">
                     <div className="py-3">
-                        {filteredProducts.length} Products {filteredProducts.length < products.length ? `Filtered` : `Total`}
+                        {filteredProducts.length} Produtos {filteredProducts.length < products.length ? `Filtrados` : `Total`}
                     </div>
                 </div>
                 <ProductSearch onProductSearch={onProductSearch} />

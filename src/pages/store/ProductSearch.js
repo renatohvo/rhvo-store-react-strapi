@@ -13,7 +13,7 @@ const ProductSearch = ({ onProductSearch }) => {
       <div className="form-group">
         <input
           type="text"
-          placeholder="Search product..."
+          placeholder="Pesquisar produto..."
           className="form-control"
           value={valueSearch}
           onChange={handleInputSearch}

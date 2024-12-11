@@ -9,7 +9,7 @@ const ProductsContextProvider = ({ children }) => {
     }, []);
 
     const fetchData = async () => {
-        const res = await fetch(`${process.env.REACT_APP_HOST}/api/products?populate=*`);
+        const res = await fetch(`${process.env.REACT_APP_HOST}/api/products?sort=publishedAt:asc&populate=*`);
         res.json()
             .then((res) => {
                 setProducts(res.data)

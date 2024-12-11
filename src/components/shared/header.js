@@ -17,9 +17,9 @@ const Header = () => {
 
     return (
         <header className={styles.header}>
-            <Link to='/' onClick={handleScrollToTop}>Store</Link>
-            <Link to='/about'>About</Link>
-            <Link to='/cart'> <CartIcon /> Cart ({itemCount})</Link>
+            <Link to='/' onClick={handleScrollToTop}>Loja</Link>
+            <Link to='/about'>Sobre</Link>
+            <Link to='/cart'> <CartIcon /> Carrinho ({itemCount})</Link>
         </header>
     );
 }
