@@ -3,6 +3,7 @@ import Layout from '../../components/Layout';
 import { useParams } from "react-router-dom";
 import { useCart } from '../../hooks/useCart';
 import { formatNumber } from '../../helpers/utils';
+import styles from './ProductDetails.module.scss';
 
 const ProductDetails = () => {
 
@@ -77,19 +78,19 @@ const ProductDetails = () => {
   return (
     <Layout title="Product" description="This is the Product page" >
       <div>
-        <section style={{ display: 'flex', gap: '16px', padding: '16px' }}>
+        <section className={styles.productDetailsSection}>
           {/* Container de imagens (à esquerda) */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', maxWidth: '600px', flex: '0 0 60%' }}>
-            <div style={{ overflow: 'hidden', borderRadius: '8px' }}>
+          <div className={styles.imageContainer}>
+            <div className={styles.imageCarousel}>
               <div
                 ref={carouselRef}
-                style={{ display: 'flex', cursor: 'grab', transform: `translateX(-${currentImageIndex * 100}%)` }}
+                className={styles.imageSlide}
+                style={{ transform: `translateX(-${currentImageIndex * 100}%)` }}
                 onDragEnd={(e) => handleSwipe(e.nativeEvent.offsetX)}
               >
                 {images.map((image, index) => (
-                  <div key={index} style={{ minWidth: '100%', overflow: 'hidden' }}>
+                  <div key={index}>
                     <img
-                      style={{ width: '100%', objectFit: 'cover' }}
                       src={image}
                       alt={index}
                     />
@@ -97,11 +98,11 @@ const ProductDetails = () => {
                 ))}
               </div>
             </div>
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px' }}>
+            <div className={styles.imageThumbnails}>
               {images.map((image, index) => (
                 <button
                   key={index}
-                  style={{ opacity: index !== currentImageIndex ? 0.5 : 1 }}
+                  className={index !== currentImageIndex ? "inactive-thumbnail" : ""}
                   onClick={() => setCurrentImageIndex(index)}
                 >
                   <img
@@ -115,16 +116,16 @@ const ProductDetails = () => {
           </div>
 
           {/* Container de informações (à direita) */}
-          <div style={{ display: 'flex', flexDirection: 'column', gap: '16px', maxWidth: '400px', flex: 1 }}>
-            <h1 style={{ fontSize: '2rem', color: '#1a202c' }}>{product.attributes.title}</h1>
+          <div className={styles.descriptionContainer}>
+            <h1 className={styles.productTitle}>{product.attributes.title}</h1>
             <div>
               <span style={{ color: '#718096' }}>DESCRIPTION</span>
-              <p style={{ color: '#4a5568' }}>{product.attributes.characteristics}</p>
+              <p className={styles.productDescription}>{product.attributes.characteristics}</p>
             </div>
             <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-              <span style={{ fontSize: '2rem' }}>{formatNumber(newPrice)}</span>
+              <span className={styles.productPrice}>{formatNumber(newPrice)}</span>
               {product.attributes.discount > 0 && (
-                <span style={{ color: '#718096', textDecoration: 'line-through' }}>{`$${oldPrice}`}</span>
+                <span className={styles.discountedPrice}>{formatNumber(oldPrice)}</span>
               )}
             </div>
             <div style={{ display: 'flex', gap: '16px' }}>

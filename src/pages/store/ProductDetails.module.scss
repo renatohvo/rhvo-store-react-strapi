@@ -1,0 +1,104 @@
+// Estilo para a seção principal
+.productDetailsSection {
+  display: flex;
+  gap: 16px;
+  padding: 16px;
+  flex-wrap: wrap;
+  justify-content: space-between;
+}
+
+// Container das imagens
+.imageContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 600px;
+  flex: 0 0 60%;
+}
+
+// Carrossel de imagens
+.imageCarousel {
+  overflow: hidden;
+  border-radius: 8px;
+}
+
+.imageSlide {
+  display: flex;
+  cursor: grab;
+}
+
+.imageSlide div {
+  min-width: 100%;
+  overflow: hidden;
+}
+
+.imageSlide img {
+  width: 100%;
+  object-fit: cover;
+}
+
+// Miniaturas das imagens
+.imageThumbnails {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
+}
+
+.imageThumbnails button {
+  opacity: 1;
+}
+
+.imageThumbnails button:not(:first-child) {
+  opacity: 0.5;
+}
+
+// Container de descrição
+.descriptionContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 400px;
+  flex: 1;
+}
+
+// Estilo para títulos e descrições
+.productTitle {
+  font-size: 2rem;
+  color: #1a202c;
+}
+
+.productDescription {
+  color: #4a5568;
+}
+
+.productPrice {
+  font-size: 2rem;
+}
+
+.discountedPrice {
+  color: #718096;
+  text-decoration: line-through;
+}
+
+// Botões
+.buttonAddCart {
+  padding: 8px 16px;
+  background-color: #3182ce;
+  color: #fff;
+  border: none;
+  border-radius: 4px;
+}
+
+// Estilo responsivo
+@media (max-width: 768px) {
+  .productDetailsSection {
+    flex-direction: column;
+  }
+  .imageContainer {
+    flex: 1;
+  }
+  .descriptionContainer {
+    flex: 1;
+    margin-top: 16px;
+  }
+}
