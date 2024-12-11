@@ -4,6 +4,7 @@ import { useParams } from "react-router-dom";
 import { useCart } from '../../hooks/useCart';
 import { formatNumber } from '../../helpers/utils';
 import styles from './ProductDetails.module.scss';
+import Loading from "./Loading";
 
 const ProductDetails = () => {
 
@@ -16,7 +17,7 @@ const ProductDetails = () => {
   const { id } = useParams();
   const [product, setProduct] = useState(null);
   const [images, setImages] = useState([]);
-  const [loading, setLoading] = useState(true);
+  const [isLoading, setIsLoading] = useState(true);
   const [carouselWidth, setCarouselWidth] = useState(0);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const carouselRef = useRef(null);
@@ -47,7 +48,7 @@ const ProductDetails = () => {
       } catch (error) {
         console.error("Error fetching product:", error);
       } finally {
-        setLoading(false);
+        setIsLoading(false);
       }
     };
 
@@ -69,7 +70,7 @@ const ProductDetails = () => {
   const newPrice = Math.trunc(product?.attributes.price - discountAmount);
   const oldPrice = Math.trunc(product?.attributes.price);
 
-  if (loading) return <p>Carregando...</p>;
+  if (isLoading) return <Loading />;
 
   if (!product) {
     return <p>Produto não encontrado.</p>;
