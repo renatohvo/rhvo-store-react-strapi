@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 import { useCart } from '../../hooks/useCart';
 import { formatNumber } from '../../helpers/utils';
 import styles from './ProductDetails.module.scss';
-import Loading from "./Loading";
+import Loading from "../Loading";
 
 const ProductDetails = () => {
 
