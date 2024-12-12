@@ -22,7 +22,7 @@ const ProductDetails = () => {
     if (offsetWidth) setCarouselWidth(offsetWidth);
   }, []);
 
-  const product = products.find(p => p.id == id);
+  const product = products.find(p => p.id === Number(id));
   if (!product) {
     return <NotFound />
   }
