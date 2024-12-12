@@ -3,7 +3,7 @@ import Layout from '../../components/Layout';
 import { useParams } from "react-router-dom";
 import { useCart } from '../../hooks/useCart';
 import { useProducts } from '../../hooks/useProducts';
-import { formatNumber } from '../../helpers/utils';
+import { formatNumber, calcPrice } from '../../helpers/utils';
 import NotFound from '../NotFound';
 import styles from './ProductDetails.module.scss';
 
@@ -23,9 +23,12 @@ const ProductDetails = () => {
   }, []);
 
   const product = products.find(p => p.id == id);
+  if (!product) {
+    return <NotFound />
+  }
 
-  const mainImage = product?.attributes.main_image.data.attributes.url;
-  const othersImages = product?.attributes.images.data;
+  const mainImage = product.attributes.main_image.data.attributes.url;
+  const othersImages = product.attributes.images.data;
   const images = [mainImage];
   if (othersImages && othersImages.length > 0) {
     othersImages.forEach((image) => {
@@ -48,13 +51,8 @@ const ProductDetails = () => {
     setCurrentImageIndex(nextIndex);
   }
 
-  const discountAmount = product?.attributes.price * (product?.attributes.discount / 100);
-  const newPrice = Math.trunc(product?.attributes.price - discountAmount);
-  const oldPrice = Math.trunc(product?.attributes.price);
-
-  if (!product) {
-    return <NotFound />
-  }
+  const newPrice = calcPrice(product.attributes.price, product.attributes.discount);
+  const oldPrice = product.attributes.price;
 
   return (
     <Layout title="Product" description="This is the Product page" >

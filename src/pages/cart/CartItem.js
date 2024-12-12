@@ -1,12 +1,14 @@
 import React from 'react';
 
 import { useCart } from '../../hooks/useCart';
-import { formatNumber } from '../../helpers/utils';
+import { formatNumber, calcPrice } from '../../helpers/utils';
 import { PlusCircleIcon, MinusCircleIcon, TrashIcon } from '../../components/icons';
 
 const CartItem = ({ product }) => {
 
     const { increase, decrease, removeProduct } = useCart();
+
+    const priceCalc = calcPrice(product.attributes.price, product.attributes.discount);
 
     return (
         <div className="row no-gutters py-2">
@@ -18,7 +20,7 @@ const CartItem = ({ product }) => {
             </div>
             <div className="col-sm-4 p-2">
                 <h5 className="mb-1">{product.attributes.title}</h5>
-                <p className="mb-1">Preço: {formatNumber(product.attributes.price)} </p>
+                <p className="mb-1">Preço: {formatNumber(priceCalc)} </p>
 
             </div>
             <div className="col-sm-2 p-2 text-center ">
