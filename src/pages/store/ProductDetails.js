@@ -2,22 +2,17 @@ import React, { useEffect, useState, useRef } from "react";
 import Layout from '../../components/Layout';
 import { useParams } from "react-router-dom";
 import { useCart } from '../../hooks/useCart';
+import { useProducts } from '../../hooks/useProducts';
 import { formatNumber } from '../../helpers/utils';
+import NotFound from '../NotFound';
 import styles from './ProductDetails.module.scss';
-import Loading from "../Loading";
 
 const ProductDetails = () => {
 
+  const { id } = useParams();
+  const { products } = useProducts();
   const { addProduct, cartItems, increase } = useCart();
 
-  const isInCart = product => {
-    return !!cartItems.find(item => item.id === product.id);
-  }
-
-  const { id } = useParams();
-  const [product, setProduct] = useState(null);
-  const [images, setImages] = useState([]);
-  const [isLoading, setIsLoading] = useState(true);
   const [carouselWidth, setCarouselWidth] = useState(0);
   const [currentImageIndex, setCurrentImageIndex] = useState(0);
   const carouselRef = useRef(null);
@@ -27,33 +22,20 @@ const ProductDetails = () => {
     if (offsetWidth) setCarouselWidth(offsetWidth);
   }, []);
 
-  useEffect(() => {
-    const fetchProduct = async () => {
-      try {
-        const response = await fetch(
-          `${process.env.REACT_APP_HOST}/api/products/${id}?populate=*`
-        );
-        const res = await response.json();
-        setProduct(res.data);
-        const mainImage = res.data.attributes.main_image.data.attributes.url;
-        const images = res.data.attributes.images.data;
+  const product = products.find(p => p.id == id);
 
-        const arrayImages = [mainImage];
-        if (images && images.length > 0) {
-          images.forEach((image) => {
-            arrayImages.push(image.attributes.url);
-          });
-        }
-        setImages(arrayImages);
-      } catch (error) {
-        console.error("Error fetching product:", error);
-      } finally {
-        setIsLoading(false);
-      }
-    };
+  const mainImage = product?.attributes.main_image.data.attributes.url;
+  const othersImages = product?.attributes.images.data;
+  const images = [mainImage];
+  if (othersImages && othersImages.length > 0) {
+    othersImages.forEach((image) => {
+      images.push(image.attributes.url);
+    });
+  }
 
-    fetchProduct();
-  }, [id]);
+  const isInCart = product => {
+    return !!cartItems.find(item => item.id === product.id);
+  }
 
   function handleSwipe(swipeDistance) {
     const swipeThreshold = carouselWidth / 4;
@@ -70,10 +52,8 @@ const ProductDetails = () => {
   const newPrice = Math.trunc(product?.attributes.price - discountAmount);
   const oldPrice = Math.trunc(product?.attributes.price);
 
-  if (isLoading) return <Loading />;
-
   if (!product) {
-    return <p>Produto não encontrado.</p>;
+    return <NotFound />
   }
 
   return (
